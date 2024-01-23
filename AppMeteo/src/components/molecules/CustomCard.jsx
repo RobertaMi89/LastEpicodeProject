@@ -1,4 +1,6 @@
 import Card from "react-bootstrap/Card";
+import { Container } from "react-bootstrap";
+
 export const CustomCard = ({ meteoProp, bgImg }) => {
   const backgroundImageStyle = {
     backgroundColor: "rgba(255, 255, 255, 0.6)",
@@ -12,27 +14,19 @@ export const CustomCard = ({ meteoProp, bgImg }) => {
   };
 
   return (
-    <div style={{ width: "500px", height: "auto" }}>
+    <Container className="cardContainer">
       <Card style={bgImg ? backgroundImageStyle : {}}>
-        <Card.Body
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
-            width: "100%",
-            height: "300px",
-          }}
-        >
+        <Card.Body className="cardBody">
           <Card.Title>
             <b>{meteoProp.name}</b>
           </Card.Title>
-
-          <Card.Text style={{ height: "50px" }}>
+          <Card.Text className="cardText">
             <img src={meteoProp.icon}></img>
-
             <b>{meteoProp.value}</b>
           </Card.Text>
         </Card.Body>
       </Card>
-    </div>
+    </Container>
   );
 };
 export default CustomCard;
