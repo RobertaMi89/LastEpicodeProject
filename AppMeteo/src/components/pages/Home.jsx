@@ -1,16 +1,14 @@
+import { Container } from "react-bootstrap";
 import CustomFooter from "../organisms/CustomFooter";
 import CustomNavBar from "../organisms/CustomNavBar";
 
 export const Home = () => {
   return (
     <>
-      <div>
-        Ciao sono Home
-        <div>
-          <CustomNavBar />
-        </div>
+      <Container fluid className="background">
+        <CustomNavBar />
         <CustomFooter />
-      </div>
+      </Container>
     </>
   );
 };

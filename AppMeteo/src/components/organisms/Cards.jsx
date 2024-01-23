@@ -1,7 +1,8 @@
 import CustomCard from "../molecules/CustomCard";
 import { Container, Row, Col } from "react-bootstrap";
 const Cards = ({ cityData }) => {
-  const dataExists = Object.keys(cityData).length;
+  console.log("cityData", cityData);
+  const dataExists = cityData && Object.keys(cityData).length;
   return (
     <>
       {dataExists ? (

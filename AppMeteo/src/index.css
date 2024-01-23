@@ -1,0 +1,9 @@
+/*HOME*/
+.background {
+  background: url("./assets/media/blossom.webp") no-repeat center / cover;
+  width: 100%;
+  height: 100vh;
+}
+.navBar {
+  max-height: 100px;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Home from "./components/pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/pages/Home";
 import DetailsPage from "./components/pages/DetailsPage";
 
 function App() {

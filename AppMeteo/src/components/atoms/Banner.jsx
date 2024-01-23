@@ -2,8 +2,8 @@ import { Container } from "react-bootstrap";
 const Banner = () => {
   return (
     <>
-      <Container className="logo d-flex ">
-        <h1 className="text-dark text-center ">METEO GHIBLI</h1>
+      <Container fluid>
+        <h1 className="text-light text-center mb-5">Meteo</h1>
       </Container>
     </>
   );
