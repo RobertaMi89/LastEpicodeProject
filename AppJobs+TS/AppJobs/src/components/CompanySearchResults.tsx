@@ -4,7 +4,7 @@ import Job from "./Job";
 import { useParams } from "react-router-dom";
 
 const CompanySearchResults = () => {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState([] as any[] );
   const params = useParams();
 
   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?company=";

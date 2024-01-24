@@ -1,10 +1,11 @@
+import { ReactElement, JSXElementConstructor, ReactNode, Key } from "react";
 import { Container, Row, Col, ListGroup, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Favourites = () => {
-  const favourites = useSelector(state => state.favourite.list);
+  const favourites = useSelector((state:any) => state.favourite.list);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Favourites = () => {
         <Col xs={10} className="mx-auto my-3">
           <ListGroup>
             {favourites.length > 0 ? (
-              favourites.map((fav, i) => (
+              favourites.map((fav: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined, i: Key | null | undefined) => (
                 <ListGroup.Item key={i}>
                   <Trash
                     color="red"
