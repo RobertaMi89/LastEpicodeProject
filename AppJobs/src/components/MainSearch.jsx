@@ -54,8 +54,9 @@ const MainSearch = () => {
           xs={10}
           className="d-flex flex-wrap align-items-center mx-auto my-3"
         >
-          <h1 className="display-1 me-auto">Remote Jobs Search</h1>
+          <h1 className="display-1 mt-5">Remote Jobs Search</h1>
           <Button
+            className="mt-5 ms-2"
             variant="outline-primary"
             onClick={() => navigate("/favourites")}
           >
@@ -64,7 +65,7 @@ const MainSearch = () => {
         </Col>
 
         {/* Form di ricerca con input di testo */}
-        <Col xs={10} className="mx-auto">
+        <Col xs={8} className="mx-auto">
           <Form onSubmit={handleSubmit}>
             <Form.Control
               type="search"
