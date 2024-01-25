@@ -8,7 +8,7 @@ const Cards = ({ cityData }) => {
       {dataExists ? (
         <Container className="pt-3 ">
           <Col xs={6} md={6}>
-            <h2 className="text-dark mb-2 ms-5">
+            <h2 className="text-dark m-5">
               <b>
                 {cityData.name},{cityData.sys.country}
               </b>
@@ -20,7 +20,7 @@ const Cards = ({ cityData }) => {
                 meteoProp={{
                   name: "Wind Speed",
                   value: cityData.wind.speed + " km/h",
-                  icon: "./src/assets/media/icon/studio-ghibpioggiaicon.png",
+                  icon: "./src/assets/media/icon/wind.png",
                 }}
                 bgImg={"./src/assets/media/si-alza-il-vento.jpg"}
               />
@@ -42,7 +42,7 @@ const Cards = ({ cityData }) => {
                 meteoProp={{
                   name: "Humidity",
                   value: cityData.main.humidity + "%",
-                  icon: "./src/assets/media/icon/humidityicon.png",
+                  icon: "./src/assets/media/icon/humidity.png",
                 }}
                 bgImg={"./src/assets/media/Ponyo.png"}
               />
@@ -52,7 +52,7 @@ const Cards = ({ cityData }) => {
                 meteoProp={{
                   name: "Temperature",
                   value: Math.floor(cityData.main.temp) + "°",
-                  icon: "./src/assets/media/icon/temperatureicon.png",
+                  icon: "./src/assets/media/icon/temperature.png",
                 }}
                 bgImg={"./src/assets/media/calcifer.jpg"}
               />

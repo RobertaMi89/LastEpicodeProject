@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const SearchForm = ({ onSearch }) => {
+const SearchForm = () => {
+  const navigate = useNavigate();
   const [location, setLocation] = useState("");
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    onSearch(location);
+    if (event.code === "Enter") {
+      handleButtonClick(location);
+    }
+  };
+
+  const handleButtonClick = (location) => {
+    navigate("/details", { state: { location } });
   };
 
   return (

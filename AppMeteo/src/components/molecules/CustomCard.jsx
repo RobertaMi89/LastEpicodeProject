@@ -8,9 +8,9 @@ export const CustomCard = ({ meteoProp, bgImg }) => {
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    padding: "100px",
+    padding: "20px",
     marginBottom: "20px",
-    maxHeight: "250px",
+    maxHeight: "200px",
   };
 
   return (

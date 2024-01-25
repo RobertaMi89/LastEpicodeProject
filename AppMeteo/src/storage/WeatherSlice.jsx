@@ -46,3 +46,5 @@ export const fetchWeather = (location) => async (dispatch) => {
 };
 
 export const weatherReducer = weatherSlice.reducer;
+
+export const weatherSelector = (state) => state.weather;
