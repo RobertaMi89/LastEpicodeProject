@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../storage/Store";
+import { fetchWeather } from "../../storage/WeatherSlice";
 
 const SearchForm = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [location, setLocation] = useState("");
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    if (event.code === "Enter") {
-      handleButtonClick(location);
+    if (location.trim() !== "") {
+      dispatch(fetchWeather(location));
+      navigate("/details", { state: { location } });
     }
-  };
-
-  const handleButtonClick = (location) => {
-    navigate("/details", { state: { location } });
   };
 
   return (
@@ -27,9 +27,8 @@ const SearchForm = () => {
           type="search"
           value={location}
           placeholder="Enter Location"
-          className="form me-2 "
+          className="form me-2"
           onChange={(event) => setLocation(event.target.value)}
-          onKeyUp={(event) => handleFormSubmit(event)}
           aria-label="Search"
         />
         <Button className="btn bi bi-search text-dark" type="submit">

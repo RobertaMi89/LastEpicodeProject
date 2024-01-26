@@ -5,6 +5,9 @@ import Cards from "../organisms/Cards";
 import Banner from "../atoms/Banner";
 import { weatherSelector } from "../../storage/WeatherSlice";
 import { useAppSelector } from "../../storage/Store";
+import { useAppDispatch } from "../../storage/Store";
+
+import { fetchWeather } from "../../storage/WeatherSlice";
 
 const CustomNavBar = () => {
   const dispatch = useAppDispatch();

@@ -1,20 +1,30 @@
 import { Container } from "react-bootstrap";
 import React, { useEffect } from "react";
-import { backgroundSelector } from "../../storage/BackgroundChangerSlice.jsx";
-import { useAppSelector } from "../../storage/Store";
+import {
+  backgroundSelector,
+  startBackgroundChanger,
+} from "../../storage/BackgroundChangerSlice";
+import { useAppSelector, useAppDispatch } from "../../storage/Store";
 import CustomNavBar from "../organisms/CustomNavBar.jsx";
-import CustomFooter from "../organisms/CustomFooter.jsx";
 
 export const Home = () => {
-  const { backgroundImage } = useAppSelector(backgroundSelector);
-  console.log(backgroundImage);
+  const dispatch = useAppDispatch();
 
+  const { backgroundImage } = useAppSelector(backgroundSelector);
+
+  useEffect(() => {
+    dispatch(startBackgroundChanger());
+  }, []);
+
+  console.log(backgroundImage);
   return (
     <>
       <Container
         fluid
         className="background"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{
+          background: `url(${backgroundImage}) no-repeat center / cover`,
+        }}
       >
         <CustomNavBar />
       </Container>

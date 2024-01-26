@@ -6,8 +6,7 @@ import { backgroundReducer } from "./BackgroundChangerSlice";
 
 const rootReducer = combineReducers({
   weather: weatherReducer,
-  background: backgroundReducer, // Assegna il tuo reducer a una chiave nel root state
-  // Altri reducer, se presenti, possono essere aggiunti qui
+  background: backgroundReducer,
 });
 
 export const store = configureStore({

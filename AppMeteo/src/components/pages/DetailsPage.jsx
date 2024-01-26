@@ -1,54 +1,48 @@
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import fetchWeatherData from "../../storage/WeatherFetch";
+import { useEffect } from "react";
 import Cards from "../organisms/Cards";
-import CustomFooter from "../organisms/CustomFooter";
+import Chart from "../organisms/Chart";
 import Container from "react-bootstrap/esm/Container";
+import { useAppDispatch, useAppSelector } from "../../storage/Store";
+import {
+  fetchForecast,
+  fetchWeather,
+  weatherSelector,
+} from "../../storage/WeatherSlice";
+import {
+  backgroundSelector,
+  startBackgroundChanger,
+} from "../../storage/BackgroundChangerSlice";
 
 export const DetailsPage = () => {
   const dispatch = useAppDispatch();
-
-  const [forecast, setForecast] = useState(null);
   const { state } = useLocation();
 
-  const handleSearch = (location) => {
-    dispatch(fetchWeather(location));
-  };
-
-  const urlData = `https://api.openweathermap.org/data/2.5/weather?q=${state.location}&appid=8f00af1719af9c473173bf7e96becb06&units=metric`;
-
   useEffect(() => {
-    const fetchForecastData = async () => {
-      try {
-        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${state.location}&appid=8f00af1719af9c473173bf7e96becb06&units=metric`;
-        const response = await fetchWeatherData(urlForecast);
-        setForecast(response);
-      } catch (error) {
-        console.error("Error fetching forecast data:", error);
+    const getForecastData = async () => {
+      if (state && state.location) {
+        dispatch(fetchForecast(state.location));
+        dispatch(fetchWeather(state.location)); // Utilizziamo Redux per effettuare la ricerca della città
+
+        dispatch(startBackgroundChanger());
       }
     };
+    getForecastData();
+  }, [dispatch, state]);
 
-    if (state && state.location) {
-      searchLocation();
-      fetchForecastData();
-    }
-  }, [state]);
-
+  const { currentWeather, forecast } = useAppSelector(weatherSelector);
+  const { backgroundImage } = useAppSelector(backgroundSelector);
   return (
     <>
       <Container
         fluid
-        className="m-0 p-0"
+        className="background m-0 p-0"
         style={{
-          height: "100vh",
-          backgroundImage: "",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
+          background: `url(${backgroundImage}) no-repeat center / cover`,
         }}
       >
-        {city && forecast && <Cards cityData={city} cityForecast={forecast} />}
-        {city && forecast && <CustomFooter cityForecast={forecast} />}
+        {currentWeather && forecast && <Cards />}
+        {currentWeather && forecast && <Chart />}
       </Container>
     </>
   );

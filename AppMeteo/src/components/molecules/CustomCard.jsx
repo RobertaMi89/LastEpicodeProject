@@ -16,7 +16,7 @@ export const CustomCard = ({ meteoProp, bgImg }) => {
   return (
     <Container className="cardContainer">
       <Card style={bgImg ? backgroundImageStyle : {}}>
-        <Card.Body className="cardBody">
+        <Card.Body className="cardBody ">
           <Card.Title>
             <b>{meteoProp.name}</b>
           </Card.Title>

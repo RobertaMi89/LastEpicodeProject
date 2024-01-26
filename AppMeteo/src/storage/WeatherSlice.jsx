@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWeatherData } from "./WeatherFetch";
+import { fetchForecastData, fetchWeatherData } from "./WeatherFetch";
+import { buildForecastData } from "../utils/Utils";
 
 export const weatherSlice = createSlice({
   name: "weather",
@@ -40,6 +41,15 @@ export const fetchWeather = (location) => async (dispatch) => {
   try {
     const data = await fetchWeatherData(location);
     dispatch(setCurrentWeather(data));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
+
+export const fetchForecast = (location) => async (dispatch) => {
+  try {
+    const data = await fetchForecastData(location);
+    dispatch(setForecast(buildForecastData(data.list)));
   } catch (error) {
     dispatch(setError(error.message));
   }
