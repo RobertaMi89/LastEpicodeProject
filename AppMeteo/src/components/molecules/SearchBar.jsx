@@ -4,25 +4,34 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../storage/Store";
 import { fetchWeather } from "../../storage/WeatherSlice";
 
+// Definisco un componente funzionale
 const SearchForm = () => {
+  // Ottengo la funzione di navigazione e il dispatch dallo store
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  // Definisco uno stato locale 'location' con valore iniziale vuoto
   const [location, setLocation] = useState("");
 
+  // Gestisco la sottomissione del modulo
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    // Verifico se la stringa 'location' non è vuota
     if (location.trim() !== "") {
+      // Dispaccia l'azione fetchWeather con la località e naviga verso la pagina dei dettagli
       dispatch(fetchWeather(location));
       navigate("/details", { state: { location } });
     }
   };
 
+  // Il componente restituisce un Container contenente un modulo di ricerca (Form)
   return (
     <Container>
       <Form
+        // Configuro la classe CSS del Form e gestisco l'evento di sottomissione
         className="containerForm d-flex justify-content-center mt-2"
         onSubmit={(event) => handleFormSubmit(event)}
       >
+        {/* Input di ricerca*/}
         <Form.Control
           type="search"
           value={location}
@@ -31,6 +40,7 @@ const SearchForm = () => {
           onChange={(event) => setLocation(event.target.value)}
           aria-label="Search"
         />
+        {/* Bottone di ricerca con un'icona di ricerca */}
         <Button className="btn bi bi-search text-dark" type="submit">
           <svg
             xmlns="http://www.w3.org/2000/svg"

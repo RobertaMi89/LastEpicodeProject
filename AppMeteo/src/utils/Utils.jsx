@@ -1,4 +1,6 @@
+// Funzione per costruire un array di dati previsionali filtrati per i prossimi 5 giorni
 export const buildForecastData = (list) => {
+  // Ottengo la data corrente
   const oggi = new Date();
   oggi.setHours(
     oggi.getHours(),
@@ -7,8 +9,10 @@ export const buildForecastData = (list) => {
     oggi.getMilliseconds()
   );
 
+  // Calcolo la durata di 5 giorni in millisecondi
   const prossimi5Giorni = 5 * 24 * 60 * 60 * 1000; // 5 giorni in millisecondi
 
+  // Filtro gli elementi nell'array list per i prossimi 5 giorni
   const prossimi5GiorniFiltrati = list
     .filter((dato) => {
       const dataOggetto = new Date(dato.dt_txt);
@@ -20,6 +24,7 @@ export const buildForecastData = (list) => {
       const oraCorrente = oggi.getHours() * 60 + oggi.getMinutes();
       const oraOggetto = dataOggetto.getHours() * 60 + dataOggetto.getMinutes();
 
+      // Verifico se esiste già un dato per la data corrente, se no, assegna il nuovo dato
       if (!acc[dataOggetto.getDate()]) {
         acc[dataOggetto.getDate()] = dato;
       } else {
@@ -28,6 +33,7 @@ export const buildForecastData = (list) => {
         const differenzaAcc = Math.abs(oraAcc - oraCorrente);
         const differenzaNuovo = Math.abs(oraOggetto - oraCorrente);
 
+        // Se il nuovo dato è più vicino all'ora corrente, sostituisco il dato esistente
         if (differenzaNuovo < differenzaAcc) {
           acc[dataOggetto.getDate()] = dato;
         }
@@ -36,6 +42,7 @@ export const buildForecastData = (list) => {
       return acc;
     }, {});
 
+  // Estraggo i valori dall'oggetto e restituisco un array di oggetti con data e temperatura
   const risultato = Object.values(prossimi5GiorniFiltrati);
   return risultato.map((el) => ({
     date: `${new Date(el.dt_txt).getDate()}/${
@@ -45,11 +52,14 @@ export const buildForecastData = (list) => {
   }));
 };
 
+// Funzione per ottenere l'ora e i minuti correnti nel formato "HH:MM"
 export const getHourMinutes = () => {
+  // Ottengo l'ora e i minuti dalla data corrente e formatta il risultato
   let date = new Date();
   let minutes =
     date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
   let hours = date.getHours() > 9 ? date.getHours() : "0" + date.getHours();
 
+  // Restituisco la stringa nel formato "HH:MM"
   return `${hours}:${minutes}`;
 };
